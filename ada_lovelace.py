@@ -3,8 +3,6 @@
 from cat.mad_hatter.decorators import hook, plugin
 from cat.looking_glass.stray_cat import StrayCat
 
-from cat.types import ChatResponse
-
 from pydantic import BaseModel
 
 
