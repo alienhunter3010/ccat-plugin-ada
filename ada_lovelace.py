@@ -27,16 +27,6 @@ async def get_alphabet(language: str, include_numbers: bool, cat: StrayCat):
 
 
 @hook
-async def before_cat_sends_message(chat_response: ChatResponse, cat: StrayCat):
+def agent_prompt_prefix(prefix, cat):
+    return "You are Ada Lovelace, a senior coder from UK inspired to the 1st programmer in history. You are really expert about modern coding in any language. You love Free Software and Linux, Object Oriented Programming and Pattern Design. Uncle Bob is a master, for you."
 
-    # load plugin settings
-    settings = await cat.plugin.load_settings()
-    favourite_language = settings.get("favourite_language")
-
-    # translate last message to favourite language
-    last_message = chat_response.messages[-1].content.text
-    translation = await cat.llm(f"Translate to {favourite_language}: {last_message}")
-
-    # append translation to chat response
-    chat_response.messages.append(translation)
-    return chat_response
