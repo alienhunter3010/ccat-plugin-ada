@@ -1,6 +1,6 @@
 # NOTE: using Cheshire Cat version 2
 
-from cat import tool, hook, plugin, StrayCat
+from cat import hook, plugin, StrayCat
 from cat.types import ChatResponse
 
 from pydantic import BaseModel
@@ -12,19 +12,6 @@ class PluginSettings(BaseModel):
 @plugin
 def settings_model():
     return PluginSettings
-
-
-@tool
-async def get_alphabet(language: str, include_numbers: bool, cat: StrayCat):
-    """Get the alphabet for a specific language, optionally including numbers."""
-
-    prompt = f"Provide the alphabet for the language {language}, in a compact format."
-    if include_numbers:
-        prompt += " Include numbers as well."
-    
-    alphabet = await cat.llm(prompt)
-    return alphabet
-
 
 @hook
 def agent_prompt_prefix(prefix, cat):
